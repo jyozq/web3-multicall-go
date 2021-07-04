@@ -9,7 +9,7 @@ import (
 
 	"github.com/alethio/web3-go/ethrpc"
 	"github.com/alethio/web3-go/ethrpc/provider/httprpc"
-	"github.com/alethio/web3-multicall-go/multicall"
+	"github.com/jon4hz/web3-multicall-go/multicall"
 )
 
 func TestExampleViewCall(t *testing.T) {
