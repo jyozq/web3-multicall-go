@@ -4,12 +4,13 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"github.com/ethereum/go-ethereum/accounts/abi"
-	"github.com/ethereum/go-ethereum/crypto"
 	"math/big"
 	"reflect"
 	"regexp"
 	"strings"
+
+	"github.com/ethereum/go-ethereum/accounts/abi"
+	"github.com/ethereum/go-ethereum/crypto"
 )
 
 type ViewCall struct {
@@ -38,7 +39,7 @@ func (call ViewCall) Validate() error {
 	return nil
 }
 
-var insideParens = regexp.MustCompile("\\(.*?\\)")
+var insideParens = regexp.MustCompile(`\(.*?\)`)
 var numericArg = regexp.MustCompile("u?int(256)|(8)")
 
 func (call ViewCall) argumentTypes() []string {
@@ -133,7 +134,6 @@ func (call ViewCall) getArgument(index int, argumentType string) (interface{}, e
 				return big.NewInt(v), nil
 			} else if v, err := num.Float64(); err != nil {
 				return big.NewInt(int64(v)), nil
-			} else {
 			}
 		} else {
 			int64 := reflect.TypeOf(int64(0))
@@ -155,7 +155,7 @@ func (call ViewCall) getArgument(index int, argumentType string) (interface{}, e
 
 func (call ViewCall) decode(raw []byte) ([]interface{}, error) {
 	retTypes := call.returnTypes()
-	args := make(abi.Arguments, 0, 0)
+	args := make(abi.Arguments, 0)
 	for index, retTypeStr := range retTypes {
 		retType, err := abi.NewType(retTypeStr, "", nil)
 		if err != nil {
@@ -171,12 +171,7 @@ func (call ViewCall) decode(raw []byte) ([]interface{}, error) {
 	returns := make([]interface{}, len(retTypes))
 	for index := range retTypes {
 		key := fmt.Sprintf("ret%d", index)
-		item := decoded[key]
-		if bigint, ok := item.(*big.Int); ok {
-			returns[index] = (*BigIntJSONString)(bigint)
-		} else {
-			returns[index] = decoded[key]
-		}
+		returns[index] = decoded[key]
 	}
 	return returns, nil
 }
