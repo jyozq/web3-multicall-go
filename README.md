@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/Alethio/multicall-go.svg?style=svg)](https://circleci.com/gh/Alethio/multicall-go)
+This fork removed the type BigIntJSONString in favor of the type big.Int. 
 
 ### Multicall
 
@@ -58,7 +58,7 @@ lastBlockHashSuccess = res.Calls["key-1"].Success;
 lastBlockHash := res.Calls["key-1"].Decoded[0].([32]byte);
 
 someBalanceSuccess := res.Calls["key-2"].Success;
-someBalance := res.Calls["key-2"].Decoded[0].(*multicall.BigIntJSONString);
+someBalance := res.Calls["key-2"].Decoded[0].(*big.Int);
 someBalanceInt := big.Int(*someBalance);
 ```
 
