@@ -13,18 +13,18 @@ import (
 )
 
 func TestExampleViewCall(t *testing.T) {
-	eth, err := getETH("https://mainnet.infura.io/v3/17ed7fe26d014e5b9be7dfff5368c69d")
+	eth, err := getETH("http://127.0.0.1:8545")
 	if err != nil {
 		panic(err)
 	}
 	vc := multicall.NewViewCall(
 		"key.1",
-		"0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643",
-		"totalReserves()(uint256)",
+		"0x52c9F319990395a214bf45E73D6ee86B85D69fde",
+		"totalSupply()(uint256)",
 		[]interface{}{},
 	)
 	vcs := multicall.ViewCalls{vc}
-	mc, _ := multicall.New(eth)
+	mc, _ := multicall.New(eth, multicall.ContractAddress(multicall.RopstenAddress))
 	block := "latest"
 	res, err := mc.Call(vcs, block)
 	if err != nil {
@@ -36,7 +36,6 @@ func TestExampleViewCall(t *testing.T) {
 	fmt.Println(res)
 	fmt.Println(res.Calls["key.1"].Decoded[0].(*big.Int))
 	fmt.Println(err)
-
 }
 
 func getETH(url string) (ethrpc.ETHInterface, error) {
@@ -49,18 +48,18 @@ func getETH(url string) (ethrpc.ETHInterface, error) {
 }
 
 func TestUnmarshaltoUint8(t *testing.T) {
-	eth, err := getETH("https://mainnet.infura.io/v3/17ed7fe26d014e5b9be7dfff5368c69d")
+	eth, err := getETH("http://127.0.0.1:8545")
 	if err != nil {
 		panic(err)
 	}
 	vc := multicall.NewViewCall(
 		"key.1",
-		"0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643",
+		"0xc715abcd34c8ed9ebbf95990e0c43401fbbc122d",
 		"decimals()(uint8)",
 		[]interface{}{},
 	)
 	vcs := multicall.ViewCalls{vc}
-	mc, _ := multicall.New(eth)
+	mc, _ := multicall.New(eth, multicall.ContractAddress(multicall.RopstenAddress))
 	block := "latest"
 	res, err := mc.Call(vcs, block)
 	if err != nil {
