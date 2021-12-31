@@ -2,7 +2,8 @@ package multicall
 
 import (
 	"encoding/hex"
-	"github.com/alethio/web3-go/ethrpc"
+
+	"github.com/jon4hz/web3-go/ethrpc"
 )
 
 type Multicall interface {

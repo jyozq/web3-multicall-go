@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/alethio/web3-go/ethrpc"
-	"github.com/alethio/web3-go/ethrpc/provider/httprpc"
+	"github.com/jon4hz/web3-go/ethrpc"
+	"github.com/jon4hz/web3-go/ethrpc/provider/httprpc"
 	"github.com/jon4hz/web3-multicall-go/multicall"
 )
 

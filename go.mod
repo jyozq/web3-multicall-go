@@ -3,9 +3,9 @@ module github.com/jon4hz/web3-multicall-go
 go 1.16
 
 require (
-	github.com/alethio/web3-go v0.0.6
 	github.com/btcsuite/btcd v0.22.0-beta // indirect
 	github.com/ethereum/go-ethereum v1.10.14
+	github.com/jon4hz/web3-go v0.0.7
 	github.com/sirupsen/logrus v1.8.1 // indirect
 	github.com/stretchr/testify v1.7.0
 	golang.org/x/crypto v0.0.0-20210616213533-5ff15b29337e // indirect

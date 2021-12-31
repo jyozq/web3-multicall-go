@@ -7,7 +7,7 @@ view functions into a single call and reads all the state in one EVM round-trip.
 
 ### Usage
 
-The library is used in conjunction with [web3-go](https://github.com/Alethio/web3-go), and the first parameter to `multicall.New` is an `ethrpc.ETHInterface` as defined in the package.
+The library is used in conjunction with [web3-go](https://github.com/jon4hz/web3-go), and the first parameter to `multicall.New` is an `ethrpc.ETHInterface` as defined in the package.
 
 #### Initialization
 
