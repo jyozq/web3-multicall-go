@@ -10,6 +10,7 @@ type Multicall interface {
 	CallRaw(calls ViewCalls, block string) (*Result, error)
 	Call(calls ViewCalls, block string) (*Result, error)
 	Contract() string
+	AggregateMethod() string
 }
 
 type multicall struct {
@@ -21,6 +22,7 @@ func New(eth ethrpc.ETHInterface, opts ...Option) (Multicall, error) {
 	config := &Config{
 		MulticallAddress: MainnetAddress,
 		Gas:              "0x400000000",
+		AggregateMethod:  AggregateMethod,
 	}
 
 	for _, opt := range opts {
@@ -69,7 +71,7 @@ func (mc multicall) makeRequest(calls ViewCalls, block string) (string, error) {
 	}
 	payload := make(map[string]string)
 	payload["to"] = mc.config.MulticallAddress
-	payload["data"] = AggregateMethod + hex.EncodeToString(payloadArgs)
+	payload["data"] = mc.AggregateMethod() + hex.EncodeToString(payloadArgs)
 	payload["gas"] = mc.config.Gas
 	var resultRaw string
 	err = mc.eth.MakeRequest(&resultRaw, ethrpc.ETHCall, payload, block)
@@ -77,5 +79,9 @@ func (mc multicall) makeRequest(calls ViewCalls, block string) (string, error) {
 }
 
 func (mc multicall) Contract() string {
+	return mc.config.MulticallAddress
+}
+
+func (mc multicall) AggregateMethod() string {
 	return mc.config.MulticallAddress
 }

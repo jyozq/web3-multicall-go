@@ -6,7 +6,8 @@ type Option func(*Config)
 
 type Config struct {
 	MulticallAddress string
-	Gas				 string
+	Gas              string
+	AggregateMethod  string
 }
 
 const (
@@ -15,7 +16,6 @@ const (
 	// RopstenMulticall : Multicall contract address on Ropsten
 	RopstenAddress = "0xf3ad7e31b052ff96566eedd218a823430e74b406"
 )
-
 
 func ContractAddress(address string) Option {
 	return func(c *Config) {
